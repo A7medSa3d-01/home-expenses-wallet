@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#2563EB">
+  <title>Home Wallet — Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="dashboard">
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><div class="brand-mark">W</div><div><strong>Home Wallet</strong><span>Family expenses</span></div></div>
+    <nav class="nav">
+      <a class="nav-link active" href="index.html"><span>⌂</span>Dashboard</a>
+      <a class="nav-link" href="student1.html"><span>1</span><span data-student-label="student1">Student 1</span></a>
+      <a class="nav-link" href="student2.html"><span>2</span><span data-student-label="student2">Student 2</span></a>
+      <a class="nav-link" href="lessons-settings.html"><span>▦</span>Lessons</a>
+      <a class="nav-link" href="settings.html"><span>⚙</span>Settings</a>
+    </nav>
+    <div class="sidebar-footer">All data stays in your browser.</div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><button class="icon-btn mobile-menu" id="menuBtn">☰</button><div><p class="eyebrow">Overview</p><h1>Dashboard</h1></div><div class="topbar-actions"><span class="date-pill" id="todayPill"></span></div></header>
+    <section class="summary-grid">
+      <article class="stat-card"><div><span>House expenses</span><strong id="houseTotal">0 EGP</strong></div><div class="stat-icon">⌂</div></article>
+      <article class="stat-card"><div><span>Lessons paid</span><strong id="lessonsTotal">0 EGP</strong></div><div class="stat-icon">✓</div></article>
+      <article class="stat-card accent"><div><span>Total this month</span><strong id="monthlyTotal">0 EGP</strong></div><div class="stat-icon">₤</div></article>
+    </section>
+    <section class="content-grid">
+      <article class="card calendar-card">
+        <div class="card-head">
+          <div><h2 id="monthTitle"></h2><p>Tap a day to view or add expenses.</p></div>
+          <div class="calendar-controls"><button class="btn btn-ghost" id="prevMonth">‹</button><button class="btn btn-ghost today-btn" id="todayBtn">Today</button><button class="btn btn-ghost" id="nextMonth">›</button></div>
+        </div>
+        <div class="calendar" id="calendar"></div>
+      </article>
+      <article class="card month-card">
+        <div class="card-head"><div><h2>Monthly breakdown</h2><p>Paid lesson costs are included.</p></div></div>
+        <div id="monthBreakdown" class="breakdown"></div>
+        <div class="tip"><strong>Tip</strong><span>Click any calendar day to keep your daily spending organized.</span></div>
+      </article>
+    </section>
+  </main>
+</div>
+<div class="overlay" id="overlay"></div>
+<div class="drawer" id="expenseDrawer" aria-hidden="true">
+  <div class="drawer-head"><div><p class="eyebrow">Daily expenses</p><h2 id="drawerDate"></h2></div><button class="icon-btn" id="closeDrawer">×</button></div>
+  <div class="drawer-body">
+    <div id="expenseList" class="expense-list"></div>
+    <div class="drawer-total"><span>Day total</span><strong id="dayTotal">0 EGP</strong></div>
+    <form id="expenseForm" class="form-card">
+      <input type="hidden" id="expenseId">
+      <div class="form-title" id="formTitle">Add expense</div>
+      <label>Title<input id="expenseTitle" required maxlength="80" placeholder="e.g. Groceries"></label>
+      <label>Amount<input id="expenseAmount" required type="number" min="0.01" step="0.01" placeholder="0.00"></label>
+      <div class="form-actions"><button type="button" class="btn btn-ghost" id="cancelEdit">Cancel</button><button class="btn btn-primary">Save expense</button></div>
+    </form>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<script src="js/app.js"></script><script src="js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+document.addEventListener("DOMContentLoaded",()=>{
+const d=Wallet.data(),f=id=>document.getElementById(id);f("student1Name").value=d.settings.student1;f("student2Name").value=d.settings.student2;f("currency").value=d.settings.currency;f("darkMode").checked=!!d.settings.darkMode;
+f("settingsForm").onsubmit=e=>{e.preventDefault();const x=Wallet.data();x.settings.student1=f("student1Name").value.trim()||"Student 1";x.settings.student2=f("student2Name").value.trim()||"Student 2";x.settings.currency=f("currency").value.trim()||"EGP";Wallet.save(x);Wallet.applySettings();Wallet.toast("Settings saved")};
+f("darkMode").onchange=e=>{const x=Wallet.data();x.settings.darkMode=e.target.checked;Wallet.save(x);Wallet.applySettings()};
+f("exportBtn").onclick=()=>{const blob=new Blob([JSON.stringify(Wallet.data(),null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`home-wallet-backup-${Wallet.monthKey()}.json`;a.click();URL.revokeObjectURL(a.href);Wallet.toast("Backup exported")};
+f("resetBtn").onclick=()=>{if(!confirm("This will permanently delete all expenses, lessons and payment records. Continue?"))return;localStorage.removeItem(Wallet.KEY);location.reload()};
+});

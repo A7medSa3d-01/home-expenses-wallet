@@ -32,7 +32,6 @@ const StudentPage = (() => {
     if (lessons.length === 0) {
       list.innerHTML = `
         <div class="empty-state">
-          ${Utils.emptyIcon()}
           <p>No lessons added yet.</p>
           <p class="empty-state-sub">Add a lesson from Lessons Settings.</p>
         </div>`;

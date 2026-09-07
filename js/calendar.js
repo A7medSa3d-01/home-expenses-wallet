@@ -43,13 +43,8 @@ const Calendar = (() => {
       const dateKey = Utils.toDateKey(viewYear, viewMonth, day);
       const total = Storage.getDayTotal(dateKey);
       const isToday = dateKey === todayKey;
-      const jsDay = new Date(viewYear, viewMonth, day).getDay();
-      const isWeekend = jsDay === 0 || jsDay === 6;
-      const cellClasses = ['cal-cell'];
-      if (isToday) cellClasses.push('cal-cell-today');
-      else if (isWeekend) cellClasses.push('cal-cell-weekend');
       cells += `
-        <button type="button" class="${cellClasses.join(' ')}" data-date="${dateKey}" aria-label="${Utils.monthLabel(viewYear, viewMonth)} ${day}, total ${Utils.formatMoney(total)}">
+        <button type="button" class="cal-cell${isToday ? ' cal-cell-today' : ''}" data-date="${dateKey}" aria-label="${Utils.monthLabel(viewYear, viewMonth)} ${day}, total ${Utils.formatMoney(total)}">
           <span class="cal-day-number">${day}${isToday ? '<span class="cal-today-tag">Today</span>' : ''}</span>
           <span class="cal-day-total${total === 0 ? ' cal-day-total-zero' : ''}">${Utils.formatMoney(total)}</span>
         </button>`;

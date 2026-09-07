@@ -38,19 +38,6 @@ const LessonsSettings = (() => {
     Storage.updateStudentName(input.dataset.student, name);
     Utils.toast('Student name updated.');
     renderLessons(); // headings inside lessons panel reference the name
-    syncNav(input.dataset.student, name);
-  }
-
-  function syncNav(studentId, name) {
-    const label = document.getElementById(`nav${capitalize(studentId)}Label`);
-    const avatar = document.getElementById(`nav${capitalize(studentId)}Avatar`);
-    if (label) label.textContent = name;
-    if (avatar) avatar.textContent = name.charAt(0).toUpperCase();
-  }
-
-  function capitalize(studentId) {
-    // 'student1' -> 'Student1'
-    return studentId.charAt(0).toUpperCase() + studentId.slice(1);
   }
 
   // ---------- Lessons per student ----------
@@ -87,7 +74,7 @@ const LessonsSettings = (() => {
         const lessons = Storage.getLessons(studentId);
         const rows = lessons.length
           ? lessons.map((l) => lessonRowHtml(studentId, l)).join('')
-          : `<div class="empty-state empty-state-compact">${Utils.emptyIcon()}<p>No lessons added yet.</p></div>`;
+          : `<div class="empty-state empty-state-compact"><p>No lessons added yet.</p></div>`;
 
         return `
         <div class="lesson-card" data-student="${studentId}">

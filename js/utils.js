@@ -54,19 +54,6 @@ const Utils = (() => {
     return `${MONTH_NAMES[m - 1].slice(0, 3)} ${d}`;
   }
 
-  // A single restrained line-icon (open tray) used across every empty state
-  // so "nothing here yet" always looks the same, intentional way.
-  function emptyIcon() {
-    return `
-      <span class="empty-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 12l2.2-7.2A2 2 0 0 1 7.1 3.4h9.8a2 2 0 0 1 1.9 1.4L21 12" />
-          <path d="M3 12v6a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6" />
-          <path d="M3 12h5.2a1 1 0 0 1 .9.6l.8 1.8a1 1 0 0 0 .9.6h2.4a1 1 0 0 0 .9-.6l.8-1.8a1 1 0 0 1 .9-.6H21" />
-        </svg>
-      </span>`;
-  }
-
   // ---------- Toast ----------
 
   function toast(message) {
@@ -177,7 +164,6 @@ const Utils = (() => {
     currentMonthKey,
     daysInMonthKey,
     formatShortDate,
-    emptyIcon,
     formatMoney,
     formatMoneyShort,
     toast,

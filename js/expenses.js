@@ -34,7 +34,6 @@ const Expenses = (() => {
     if (items.length === 0) {
       list.innerHTML = `
         <div class="empty-state">
-          ${Utils.emptyIcon()}
           <p>No expenses yet.</p>
           <p class="empty-state-sub">Add your first expense for this day.</p>
         </div>`;

@@ -1,67 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#2563EB">
-  <title>Home Wallet — Dashboard</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard · Home Expenses Wallet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
 </head>
-<body data-page="dashboard">
-<div class="app-shell">
-  <aside class="sidebar" id="sidebar">
-    <div class="brand"><div class="brand-mark">W</div><div><strong>Home Wallet</strong><span>Family expenses</span></div></div>
-    <nav class="nav">
-      <a class="nav-link active" href="index.html"><span>⌂</span>Dashboard</a>
-      <a class="nav-link" href="student1.html"><span>1</span><span data-student-label="student1">Student 1</span></a>
-      <a class="nav-link" href="student2.html"><span>2</span><span data-student-label="student2">Student 2</span></a>
-      <a class="nav-link" href="lessons-settings.html"><span>▦</span>Lessons</a>
-      <a class="nav-link" href="settings.html"><span>⚙</span>Settings</a>
+<body>
+  <div class="app-shell">
+    <nav class="sidebar" aria-label="Main navigation">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">H</span>
+        <span class="brand-name">Expenses Wallet</span>
+      </div>
+      <ul class="nav-list" role="list" style="list-style:none; margin:0; padding:0;">
+        <li><a class="nav-link" href="index.html">
+          <span class="nav-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-9"/><path d="M9.5 20v-5.5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1V20"/></svg>
+          </span>
+          <span class="nav-label">Dashboard</span>
+        </a></li>
+        <li><a class="nav-link" href="student1.html">
+          <span class="nav-avatar" id="navStudent1Avatar" aria-hidden="true">S</span>
+          <span class="nav-label" id="navStudent1Label">Student 1</span>
+        </a></li>
+        <li><a class="nav-link" href="student2.html">
+          <span class="nav-avatar" id="navStudent2Avatar" aria-hidden="true">S</span>
+          <span class="nav-label" id="navStudent2Label">Student 2</span>
+        </a></li>
+        <li><a class="nav-link" href="lessons-settings.html">
+          <span class="nav-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19a1 1 0 0 1 1 1v14.5a1 1 0 0 1-1 1H6.5A2.5 2.5 0 0 0 4 22"/><path d="M4 5.5v14A2.5 2.5 0 0 0 6.5 22"/><path d="M8 8h8M8 11.5h8"/></svg>
+          </span>
+          <span class="nav-label">Lessons Settings</span>
+        </a></li>
+      </ul>
+      <div class="sidebar-footer">
+        <button type="button" id="themeToggle" class="icon-btn" aria-label="Switch to dark mode">🌙</button>
+      </div>
     </nav>
-    <div class="sidebar-footer">All data stays in your browser.</div>
-  </aside>
-  <main class="main">
-    <header class="topbar"><button class="icon-btn mobile-menu" id="menuBtn">☰</button><div><p class="eyebrow">Overview</p><h1>Dashboard</h1></div><div class="topbar-actions"><span class="date-pill" id="todayPill"></span></div></header>
-    <section class="summary-grid">
-      <article class="stat-card"><div><span>House expenses</span><strong id="houseTotal">0 EGP</strong></div><div class="stat-icon">⌂</div></article>
-      <article class="stat-card"><div><span>Lessons paid</span><strong id="lessonsTotal">0 EGP</strong></div><div class="stat-icon">✓</div></article>
-      <article class="stat-card accent"><div><span>Total this month</span><strong id="monthlyTotal">0 EGP</strong></div><div class="stat-icon">₤</div></article>
-    </section>
-    <section class="content-grid">
-      <article class="card calendar-card">
-        <div class="card-head">
-          <div><h2 id="monthTitle"></h2><p>Tap a day to view or add expenses.</p></div>
-          <div class="calendar-controls"><button class="btn btn-ghost" id="prevMonth">‹</button><button class="btn btn-ghost today-btn" id="todayBtn">Today</button><button class="btn btn-ghost" id="nextMonth">›</button></div>
+
+    <main class="main-content">
+      <div class="page-header">
+        <div>
+          <h1>Dashboard</h1>
+          <p class="page-subtitle">Track your household spending at a glance.</p>
         </div>
-        <div class="calendar" id="calendar"></div>
-      </article>
-      <article class="card month-card">
-        <div class="card-head"><div><h2>Monthly breakdown</h2><p>Paid lesson costs are included.</p></div></div>
-        <div id="monthBreakdown" class="breakdown"></div>
-        <div class="tip"><strong>Tip</strong><span>Click any calendar day to keep your daily spending organized.</span></div>
-      </article>
-    </section>
-  </main>
-</div>
-<div class="overlay" id="overlay"></div>
-<div class="drawer" id="expenseDrawer" aria-hidden="true">
-  <div class="drawer-head"><div><p class="eyebrow">Daily expenses</p><h2 id="drawerDate"></h2></div><button class="icon-btn" id="closeDrawer">×</button></div>
-  <div class="drawer-body">
-    <div id="expenseList" class="expense-list"></div>
-    <div class="drawer-total"><span>Day total</span><strong id="dayTotal">0 EGP</strong></div>
-    <form id="expenseForm" class="form-card">
-      <input type="hidden" id="expenseId">
-      <div class="form-title" id="formTitle">Add expense</div>
-      <label>Title<input id="expenseTitle" required maxlength="80" placeholder="e.g. Groceries"></label>
-      <label>Amount<input id="expenseAmount" required type="number" min="0.01" step="0.01" placeholder="0.00"></label>
-      <div class="form-actions"><button type="button" class="btn btn-ghost" id="cancelEdit">Cancel</button><button class="btn btn-primary">Save expense</button></div>
-    </form>
+      </div>
+
+      <section class="panel" aria-label="Monthly summary">
+        <div class="panel-header">
+          <h2>Monthly Summary — <span id="summaryMonthLabel"></span></h2>
+        </div>
+        <div class="summary-grid">
+          <div class="summary-item">
+            <span class="summary-label">House Expenses</span>
+            <span class="summary-value" id="summaryHouse">0</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Lessons Expenses</span>
+            <span class="summary-value" id="summaryLessons">0</span>
+          </div>
+          <div class="summary-item summary-item-total">
+            <span class="summary-label">Total Expenses</span>
+            <span class="summary-value" id="summaryTotal">0</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" aria-label="Calendar">
+        <div class="panel-header">
+          <span class="calendar-month-label" id="calendarMonthLabel"></span>
+          <div class="calendar-nav">
+            <button type="button" id="prevMonthBtn" class="icon-btn" aria-label="Previous month">‹</button>
+            <button type="button" id="todayMonthBtn" class="btn btn-ghost btn-small">Today</button>
+            <button type="button" id="nextMonthBtn" class="icon-btn" aria-label="Next month">›</button>
+          </div>
+        </div>
+        <div class="calendar-weekdays" aria-hidden="true">
+          <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+        </div>
+        <div class="calendar-grid" id="calendarGrid" role="group" aria-label="Days of the month"></div>
+      </section>
+    </main>
   </div>
-</div>
-<div class="toast" id="toast"></div>
-<script src="js/app.js"></script><script src="js/dashboard.js"></script>
+
+  <!-- Day expense drawer -->
+  <div id="drawerOverlay" class="drawer-overlay"></div>
+  <aside id="expenseDrawer" class="drawer" aria-hidden="true" aria-label="Day expenses">
+    <div class="drawer-header">
+      <h2 id="drawerDate"></h2>
+      <button type="button" id="drawerClose" class="icon-btn" aria-label="Close">✕</button>
+    </div>
+    <div id="drawerList" class="drawer-list"></div>
+    <div class="drawer-total">
+      <span>Total</span>
+      <strong id="drawerTotal">0</strong>
+    </div>
+    <form id="expenseForm" class="expense-form" novalidate>
+      <div class="form-row">
+        <label for="expenseTitle">Title</label>
+        <input id="expenseTitle" type="text" placeholder="e.g. Groceries" />
+        <span class="field-error" id="titleError"></span>
+      </div>
+      <div class="form-row">
+        <label for="expenseAmount">Amount</label>
+        <input id="expenseAmount" type="number" min="0" step="0.01" placeholder="0" />
+        <span class="field-error" id="amountError"></span>
+      </div>
+      <div class="form-actions">
+        <button type="button" id="cancelEditBtn" class="btn btn-ghost hidden">Cancel</button>
+        <button type="submit" class="btn btn-primary" id="submitExpenseBtn">+ Add Expense</button>
+      </div>
+    </form>
+  </aside>
+
+  <script src="js/storage.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/expenses.js"></script>
+  <script src="js/calendar.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('navStudent1Label').textContent = Storage.getStudentName('student1');
+      document.getElementById('navStudent2Label').textContent = Storage.getStudentName('student2');
+      document.getElementById('navStudent1Avatar').textContent = Storage.getStudentName('student1').charAt(0).toUpperCase();
+      document.getElementById('navStudent2Avatar').textContent = Storage.getStudentName('student2').charAt(0).toUpperCase();
+      Expenses.init();
+      Dashboard.init();
+      Calendar.init();
+    });
+  </script>
 </body>
 </html>

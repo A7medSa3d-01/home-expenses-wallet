@@ -1,9 +1,0 @@
-document.addEventListener("DOMContentLoaded",()=>{
-const form=document.getElementById("lessonForm"),list=document.getElementById("lessonsList");
-function render(){const d=Wallet.data(),rows=[];["student1","student2"].forEach(st=>(d.lessons[st]||[]).forEach(l=>rows.push(`<div class="lesson-setting"><div><strong>${esc(l.name)}</strong><small>${d.settings[st]} · ${Wallet.money(l.price)}/month</small></div><div class="lesson-setting-actions"><button class="mini-btn" data-edit="${st}|${l.id}">Edit</button><button class="mini-btn delete" data-delete="${st}|${l.id}">Delete</button></div></div>`));list.innerHTML=rows.length?rows.join(""):`<div class="empty">No lessons added yet.</div>`}
-function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-form.onsubmit=e=>{e.preventDefault();const d=Wallet.data(),st=document.getElementById("lessonStudent").value,name=document.getElementById("lessonName").value.trim(),price=Number(document.getElementById("lessonPrice").value);if(!name||price<=0)return;d.lessons[st].push({id:Wallet.uid("lesson"),name,price});Wallet.save(d);form.reset();render();Wallet.applySettings();Wallet.toast("Lesson added")};
-list.onclick=e=>{const del=e.target.dataset.delete;if(del){const [st,id]=del.split("|");if(!confirm("Delete this lesson? Existing payment records will remain but the lesson will no longer appear."))return;const d=Wallet.data();d.lessons[st]=d.lessons[st].filter(l=>l.id!==id);Wallet.save(d);render();Wallet.toast("Lesson deleted")}
-const edit=e.target.dataset.edit;if(edit){const [st,id]=edit.split("|"),d=Wallet.data(),l=d.lessons[st].find(x=>x.id===id);if(!l)return;const name=prompt("Lesson name:",l.name);if(name===null)return;const price=Number(prompt("Monthly price:",l.price));if(!name.trim()||price<=0)return; l.name=name.trim();l.price=price;Wallet.save(d);render();Wallet.toast("Lesson updated")}}
-render();
-});

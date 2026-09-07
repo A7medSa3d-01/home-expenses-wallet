@@ -1,5 +1,85 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Home Wallet — Lessons</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css"></head>
-<body data-page="lessons-settings"><div class="app-shell"><aside class="sidebar" id="sidebar"><div class="brand"><div class="brand-mark">W</div><div><strong>Home Wallet</strong><span>Family expenses</span></div></div><nav class="nav"><a class="nav-link" href="index.html"><span>⌂</span>Dashboard</a><a class="nav-link" href="student1.html"><span>1</span><span data-student-label="student1">Student 1</span></a><a class="nav-link" href="student2.html"><span>2</span><span data-student-label="student2">Student 2</span></a><a class="nav-link active" href="lessons-settings.html"><span>▦</span>Lessons</a><a class="nav-link" href="settings.html"><span>⚙</span>Settings</a></nav><div class="sidebar-footer">All data stays in your browser.</div></aside>
-<main class="main"><header class="topbar"><button class="icon-btn mobile-menu" id="menuBtn">☰</button><div><p class="eyebrow">Configuration</p><h1>Lessons</h1></div></header>
-<section class="content-grid settings-grid"><article class="card"><div class="card-head"><div><h2>Add lesson</h2><p>Create a recurring monthly lesson for a student.</p></div></div><form id="lessonForm" class="settings-form"><label>Student<select id="lessonStudent" class="select"><option value="student1">Student 1</option><option value="student2">Student 2</option></select></label><label>Lesson name<input id="lessonName" required maxlength="60" placeholder="e.g. Mathematics"></label><label>Monthly price<input id="lessonPrice" required type="number" min="0.01" step="0.01" placeholder="500"></label><div class="form-actions"><button class="btn btn-primary">Add lesson</button></div></form></article><article class="card"><div class="card-head"><div><h2>Current lessons</h2><p>Edit or remove recurring lessons.</p></div></div><div id="lessonsList"></div></article></section></main></div><div class="toast" id="toast"></div><script src="js/app.js"></script><script src="js/lessons-settings.js"></script></body></html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lessons Settings · Home Expenses Wallet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <nav class="sidebar" aria-label="Main navigation">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">H</span>
+        <span class="brand-name">Expenses Wallet</span>
+      </div>
+      <ul class="nav-list" role="list" style="list-style:none; margin:0; padding:0;">
+        <li><a class="nav-link" href="index.html">
+          <span class="nav-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-9"/><path d="M9.5 20v-5.5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1V20"/></svg>
+          </span>
+          <span class="nav-label">Dashboard</span>
+        </a></li>
+        <li><a class="nav-link" href="student1.html">
+          <span class="nav-avatar" id="navStudent1Avatar" aria-hidden="true">S</span>
+          <span class="nav-label" id="navStudent1Label">Student 1</span>
+        </a></li>
+        <li><a class="nav-link" href="student2.html">
+          <span class="nav-avatar" id="navStudent2Avatar" aria-hidden="true">S</span>
+          <span class="nav-label" id="navStudent2Label">Student 2</span>
+        </a></li>
+        <li><a class="nav-link" href="lessons-settings.html">
+          <span class="nav-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19a1 1 0 0 1 1 1v14.5a1 1 0 0 1-1 1H6.5A2.5 2.5 0 0 0 4 22"/><path d="M4 5.5v14A2.5 2.5 0 0 0 6.5 22"/><path d="M8 8h8M8 11.5h8"/></svg>
+          </span>
+          <span class="nav-label">Lessons Settings</span>
+        </a></li>
+      </ul>
+      <div class="sidebar-footer">
+        <button type="button" id="themeToggle" class="icon-btn" aria-label="Switch to dark mode">🌙</button>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <div class="page-header">
+        <div>
+          <h1>Lessons Settings</h1>
+          <p class="page-subtitle">Manage student names and their monthly lesson fees.</p>
+        </div>
+      </div>
+
+      <section class="panel" aria-label="Student names">
+        <div class="panel-header">
+          <h2>Students</h2>
+        </div>
+        <div id="studentsPanel"></div>
+      </section>
+
+      <section class="panel" aria-label="Lessons per student">
+        <div class="panel-header">
+          <h2>Lessons</h2>
+        </div>
+        <div id="lessonsPanel" class="lessons-panel-grid"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/lessons.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('navStudent1Label').textContent = Storage.getStudentName('student1');
+      document.getElementById('navStudent2Label').textContent = Storage.getStudentName('student2');
+      document.getElementById('navStudent1Avatar').textContent = Storage.getStudentName('student1').charAt(0).toUpperCase();
+      document.getElementById('navStudent2Avatar').textContent = Storage.getStudentName('student2').charAt(0).toUpperCase();
+      LessonsSettings.init();
+    });
+  </script>
+</body>
+</html>
